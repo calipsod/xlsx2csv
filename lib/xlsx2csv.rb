@@ -2,8 +2,7 @@ require 'rubygems'
 require 'bundler'
 require 'csv'
 require 'tmpdir'
-
-Bundler.require(:default)
+require 'ox'
 
 require 'xlsx2csv/version'
 require 'xlsx2csv/row_parser'

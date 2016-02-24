@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
+gemspec
 
-gem 'ox'
-gem 'slop'
-
-group :test do
+group :development do
   gem 'rspec'
 end
