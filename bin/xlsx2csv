@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+require 'xlsx2csv'
+require 'slop'
+
+options = Slop.parse do |o|
+  o.string '-f', '--file', 'source XLSX file (required)'
+  o.string '-o', '--out', 'output file name'
+  o.string '-s', '--sheet', 'worksheet name to convert (first by default)'
+end
+
+unless options.file?
+  puts options
+  exit
+end
+
+Xlsx2Csv.convert(options)
