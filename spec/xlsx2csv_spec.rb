@@ -1,5 +1,5 @@
 RSpec.describe Xlsx2Csv do
-  describe '#convert' do
+  describe '.convert' do
     it 'should convert XLSX file to CSV' do
       expected_csv = File.read(File.join(File.dirname(__FILE__), 'file/test.csv'))
       options = {

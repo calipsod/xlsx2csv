@@ -5,13 +5,19 @@ require 'tmpdir'
 require 'ox'
 
 require 'xlsx2csv/version'
-require 'xlsx2csv/row_parser'
-require 'xlsx2csv/reader'
+require 'xlsx2csv/strings/row_parser'
+require 'xlsx2csv/strings/file'
+require 'xlsx2csv/sheet/row_parser'
+require 'xlsx2csv/sheet/file'
+require 'xlsx2csv/document'
 require 'xlsx2csv/csv_writer'
 
 module Xlsx2Csv
   def self.convert(options)
-    reader = Xlsx2Csv::Reader.new(options[:file], options[:sheet])
-    Xlsx2Csv::CsvWriter.new(reader).write(options[:out])
+    Xlsx2Csv::Document.open(options[:file]) do |document|
+      sheet = document.worksheet(options[:sheet])
+      filename = options[:out] || document.filename.sub(/(\..+)?$/, '.csv')
+      Xlsx2Csv::CsvWriter.new(sheet).write(options[:out])
+    end
   end
 end

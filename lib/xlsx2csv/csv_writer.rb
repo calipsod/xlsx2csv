@@ -1,13 +1,11 @@
 class Xlsx2Csv::CsvWriter
-  def initialize(reader)
-    @reader = reader
+  def initialize(sheet)
+    @sheet = sheet
   end
 
-  def write(filename = nil)
-    filename ||= @reader.filename.sub(/(\..+)?$/, '.csv')
-
+  def write(filename)
     CSV.open(filename, 'wb') do |csv|
-      @reader.each_row do |row|
+      @sheet.each do |row|
         csv << row
       end
     end
