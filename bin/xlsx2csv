@@ -12,7 +12,7 @@ end
 
 unless options.file?
   puts options
-  exit
+  exit 1
 end
 
 Xlsx2Csv.convert(options)
