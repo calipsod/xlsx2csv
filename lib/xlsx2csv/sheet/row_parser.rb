@@ -24,10 +24,16 @@ module Xlsx2Csv::Sheet
     end
 
     def value(value)
-      if @element_name == :v && respond_to?(@value_method, true)
+      if @element_name == :v
         @values += Array.new(@col_index - @values.count) if @values.count < @col_index
-        @values << send(@value_method, value)
+        if !@value_method.nil? && respond_to?(@value_method, true)
+          @values << send(@value_method, value)
+        else
+          @values << value.as_s
+        end
       end
+
+      @value_method = nil
     end
 
     def end_element(name)

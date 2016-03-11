@@ -18,7 +18,8 @@ class Xlsx2Csv::Document
     extract!
     name =
       if name.nil?
-        Dir.entries(File.join(tmpdir, 'xl', 'worksheets'))[2] # First entry
+        sheets = Dir.glob(File.join(tmpdir, 'xl', 'worksheets', '*.xml'))
+        File.basename(sheets.first)
       else
         "#{name.downcase}.xml"
       end

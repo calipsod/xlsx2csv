@@ -17,7 +17,7 @@ module Xlsx2Csv
     Xlsx2Csv::Document.open(options[:file]) do |document|
       sheet = document.worksheet(options[:sheet])
       filename = options[:out] || document.filename.sub(/(\..+)?$/, '.csv')
-      Xlsx2Csv::CsvWriter.new(sheet).write(options[:out])
+      Xlsx2Csv::CsvWriter.new(sheet).write(filename)
     end
   end
 end
